@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.amqp.inbound.AmqpInboundChannelAdapter;
 import org.springframework.integration.annotation.ServiceActivator;
-import org.springframework.integration.dsl.channel.MessageChannels;
+import org.springframework.integration.dsl.MessageChannels;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
@@ -51,7 +51,7 @@ public class RabbitConfig {
 
     @Bean
     public AmqpInboundChannelAdapter amqpInboundChannelAdapterPageView(SimpleMessageListenerContainer listenerContainer,
-                                                        @Qualifier("amqpInputChannel") MessageChannel inboundChannel) {
+                                                                       @Qualifier("amqpInputChannel") MessageChannel inboundChannel) {
         AmqpInboundChannelAdapter adapter = new AmqpInboundChannelAdapter(listenerContainer);
         adapter.setOutputChannel(inboundChannel);
         return adapter;
@@ -72,7 +72,7 @@ public class RabbitConfig {
 
                 InputStream is = new ByteArrayInputStream(xmlString.getBytes(StandardCharsets.UTF_8));
 
-                PageViewEvent pageViewEvent =  JAXB.unmarshal(is, PageViewEvent.class);
+                PageViewEvent pageViewEvent = JAXB.unmarshal(is, PageViewEvent.class);
 
                 PageView pageView = new PageView();
                 pageView.setPageUrl(pageViewEvent.getPageUrl());
